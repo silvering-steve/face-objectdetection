@@ -6,4 +6,5 @@ class Model:
         self.model = YOLO("models/face.pt")
 
 
+
 model = Model()

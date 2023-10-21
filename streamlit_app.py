@@ -23,8 +23,8 @@ def main():
     while cap.isOpened():
         ret, frame = cap.read()
 
-        predicted = model.predict(frame)
-        predict_plot = predicted[0].plot()[:, :, ::-1]
+        predicted = model.model.predict(frame)
+        predict_plot = predicted[0].plot()
 
         frame_placeholder.image(predict_plot, channels="BGR")
 
