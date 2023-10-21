@@ -1,25 +1,34 @@
+import cv2
 import streamlit as st
+
+from src.model.predictor import model
+
+hide_img_fs = '''
+    <style>
+    button[title="View fullscreen"]{
+        visibility: hidden;}
+    </style>
+    '''
 
 
 def main():
     st.set_page_config(page_title="Face Detection")
     st.title("Face Object Detection")
-    st.caption("Detect face, nose, mouth, and eyes using your camera")
+
+    st.markdown(hide_img_fs, unsafe_allow_html=True)
 
     cap = cv2.VideoCapture(0)
     frame_placeholder = st.empty()
-    stop_button_pressed = st.button("Stop")
 
-    while cap.isOpened() and not stop_button_pressed:
+    while cap.isOpened():
         ret, frame = cap.read()
 
-        if not ret:
-            st.write("Video Capture Ended")
-            break
+        predicted = model.predict(frame)
+        predict_plot = predicted[0].plot()[:, :, ::-1]
 
-        frame_placeholder.image(frame, channels="RGB")
+        frame_placeholder.image(predict_plot, channels="BGR")
 
-        if cv2.waitKey(1) & 0xFF == ord("q") or stop_button_pressed:
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             break
 
     cap.release()
