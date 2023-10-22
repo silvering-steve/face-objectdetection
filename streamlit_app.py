@@ -10,8 +10,8 @@ def main():
     st.sidebar.title("Settings")
     image = st.sidebar.file_uploader("Face", label_visibility="collapsed")
 
-    conf_slider = st.sidebar.slider("Confidence", min_value=0.0, max_value=1.0)
-    iou_slider = st.sidebar.slider("Intersection", min_value=0.0, max_value=1.0)
+    conf_slider = st.sidebar.slider("Confidence", min_value=0.0, max_value=1.0, value=0.5)
+    iou_slider = st.sidebar.slider("Intersection", min_value=0.0, max_value=1.0, value=0.7)
 
     if st.sidebar.button("Predict"):
         if image is not None:
