@@ -3,5 +3,4 @@ torch
 torchvision
 torchaudio
 streamlit
-streamlit-webrtc
 ultralytics
